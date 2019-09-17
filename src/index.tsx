@@ -6,7 +6,7 @@ import * as ReactDOM from 'react-dom';
 import { createBrowserHistory as createHistory } from 'history'
 import { Provider } from 'react-redux';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
-import { App } from './components';
+import { App } from './containers';
 
 import configureStore from './store/configureStore';
 
