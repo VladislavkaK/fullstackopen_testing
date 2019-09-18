@@ -6,7 +6,7 @@ import * as ReactDOM from 'react-dom';
 import { createBrowserHistory as createHistory } from 'history'
 import { Provider } from 'react-redux';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
-import { App } from './containers';
+import { RootRoute } from './routing';
 
 import configureStore from './store/configureStore';
 
@@ -20,7 +20,7 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={browserHistory}>
-        <App />
+        <RootRoute />
       </ConnectedRouter>
     </Provider>,
     document.querySelector('app'),

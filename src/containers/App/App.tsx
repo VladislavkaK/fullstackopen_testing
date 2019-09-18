@@ -1,9 +1,22 @@
 import * as React from "react";
 import "../../assets/scss/App.scss";
 import { Content, Header, Total } from '../../components';
-
+import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
+ 
 export interface AppProps {
 }
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+export const Container = styled.div`
+  padding: 40px;
+`;
 
 export default class App extends React.Component<AppProps, undefined> {
     render() {
@@ -24,15 +37,18 @@ export default class App extends React.Component<AppProps, undefined> {
         ];
 
         return (
-            <div className="container-app">
-                <Header course={course} />
-                <Content 
-                    part={part}
-                />
-                <Total
-                    part={part}
-                />
-            </div>
+            <React.Fragment>
+                <GlobalStyle />
+                <Container>
+                    <Header course={course} />
+                    <Content 
+                        part={part}
+                    />
+                    <Total
+                        part={part}
+                    />
+                </Container>
+            </React.Fragment>
         );
     }
 }
