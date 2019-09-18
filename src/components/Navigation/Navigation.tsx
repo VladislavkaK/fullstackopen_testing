@@ -40,6 +40,7 @@ const Navigation = (props) => {
                 <NavBar>
                     <Link to={{pathname: '/part1'}}>Task: Part 1</Link>
                     <Link to={{pathname: '/unicafe'}}>Task: Unicafe</Link>
+                    <Link to={{pathname: '/anecdotes'}}>Task: Anecdotes</Link>
                 </NavBar>
             </WrapContainer>
         </React.Fragment>
