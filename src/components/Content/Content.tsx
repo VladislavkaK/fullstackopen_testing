@@ -1,19 +1,29 @@
 import * as React from 'react';
-import { Part } from '../../components';
+import { Total } from '../../components';
+import styled from 'styled-components';
+
+const ContainerCourse = styled.div`
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+`;
 
 const Content = ({
     part
 }) => {
     return (
-        <div className="content" >
+        <>
+            
             {part.map((data, index) => {
                 return (
-                    <React.Fragment key={index} >
-                        <Part part={data.name} exercise={data.exercises} />
-                    </React.Fragment>
+                    <ContainerCourse key={index} >
+                        <h3>{data.name}</h3>
+                        <Total parts={data.parts} />
+                    </ContainerCourse>
                 )
             })}
-        </div>
+        </>
     )
 }
 

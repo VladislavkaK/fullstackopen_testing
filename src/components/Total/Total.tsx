@@ -1,18 +1,34 @@
 import * as React from 'react';
+import { Part } from '../../components';
+import styled from 'styled-components';
+
+const Paragraph = styled.p`
+    font-size: 20px;
+    font-weight: 700;
+`;
 
 const Total = ({
-    part
+    parts
 }) => {
 
     let total = 0;
 
-    for (let i = 0; i < part.length; i++) {
-        total += part[i].exercises;
+    for (let i = 0; i < parts.length; i++) {
+        total += parts[i].exercises;
     }
+
+    const renderPart = parts.map((data, index) => {
+        return (
+            <React.Fragment key={index} >
+                <Part name={data.name} exercises={data.exercises} />
+            </React.Fragment>
+        )
+    })
 
     return (
         <div className="total" >
-            <p>Number of exercises: {total} </p>
+            {renderPart}
+            <Paragraph>Number of exercises: {total} </Paragraph>
         </div>
     )
 }

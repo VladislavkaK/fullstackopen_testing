@@ -1,6 +1,6 @@
 import * as React from "react";
 import "../../assets/scss/App.scss";
-import { Content, Header, Total } from '../../components';
+import { Content, Header } from '../../components';
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
  
@@ -21,19 +21,48 @@ export const Container = styled.div`
 
 export default class App extends React.Component<AppProps, undefined> {
     render() {
-        const course = 'Half Stack application development';
-        const part = [
+        const courses = [
             {
-                name: 'Fundamentals of React',
-                exercises: 10
-            },
+              name: 'Half Stack application development',
+              id: 1,
+              parts: [
+                {
+                  name: 'Fundamentals of React',
+                  exercises: 10,
+                  id: 1
+                },
+                {
+                  name: 'Using props to pass data',
+                  exercises: 7,
+                  id: 2
+                },
+                {
+                  name: 'State of a component',
+                  exercises: 14,
+                  id: 3
+                },
+                {
+                  name: 'Redux',
+                  exercises: 11,
+                  id: 4
+                }
+              ]
+            }, 
             {
-                name: 'Using props to pass data',
-                exercises: 7
-            },
-            {
-                name: 'State of a component',
-                exercises: 14
+              name: 'Node.js',
+              id: 2,
+              parts: [
+                {
+                  name: 'Routing',
+                  exercises: 3,
+                  id: 1
+                },
+                {
+                  name: 'Middlewares',
+                  exercises: 7,
+                  id: 2
+                }
+              ]
             }
         ];
 
@@ -41,12 +70,9 @@ export default class App extends React.Component<AppProps, undefined> {
             <React.Fragment>
                 <GlobalStyle />
                 <Container>
-                    <Header course={course} />
+                    <Header course="Web development curriculum" />
                     <Content 
-                        part={part}
-                    />
-                    <Total
-                        part={part}
+                        part={courses}
                     />
                 </Container>
             </React.Fragment>
