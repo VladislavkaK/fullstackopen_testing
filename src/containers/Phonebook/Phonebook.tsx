@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { HeaderPhonebook, SearchPhonebook, NumbersPhonebook, FormPhonebook } from '../../components';
 import { GlobalContainer, ContainerBody } from '../../styles/stylePhonebook';
@@ -14,6 +15,16 @@ const Phonebook = () => {
     const [newName, setNewName] = useState('');
     const [phone, setPhone] = useState('');
     const [search, setSearch] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/persons')
+            .then(response => {
+                setPersons(response.data);
+            })
+            .catch(error => {
+                return error; 
+            })
+    }, [])
 
     const onChangeNewName = (e) => {
         const { value } = e.target;
