@@ -5,6 +5,11 @@ import Part from './Part';
 import Navigation from './Navigation';
 import Statistics from './Statistics';
 import Statistic from './Statistic';
+import HeaderPhonebook from './HeaderPhonebook';
+import SearchPhonebook from './SearchPhonebook';
+import Input from './Input';
+import NumbersPhonebook from './NumbersPhonebook';
+import FormPhonebook from './FormPhonebook';
 
 export {
     Content,
@@ -13,5 +18,10 @@ export {
     Part,
     Navigation,
     Statistics,
-    Statistic
+    Statistic,
+    HeaderPhonebook,
+    SearchPhonebook,
+    Input,
+    NumbersPhonebook,
+    FormPhonebook
 }
