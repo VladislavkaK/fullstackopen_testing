@@ -7,6 +7,7 @@ import { createBrowserHistory as createHistory } from 'history'
 import { Provider } from 'react-redux';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { RootRoute } from './routing';
+import './translation/i18n';
 
 import configureStore from './store/configureStore';
 

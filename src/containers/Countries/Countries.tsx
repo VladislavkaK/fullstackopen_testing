@@ -4,24 +4,27 @@ import { useState, useEffect } from 'react';
 import { 
     ContainerCountries, 
     ContainerMain,
-    ParagraphDescription,
     ContainerFilterCountries,
-    OneCountry,
-    ContainerNameCountry,
-    ContainerInformationCountry,
-    ContainerLanguagesCountry,
-    ContainerFlagCountry,
-    ContainerFlagCountryImage 
 } from '../../styles/styleCountries';
 import { GlobalContainer } from '../../styles/styleGlobal';
-import { Input } from '../../components';
+import { Input, Toggle, ContentCountry } from '../../components';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
+import i18n from '../../translation/i18n';
+import useDarkMode from '../../utils/use-dark-mode';
 
-const Countries = () => {
+import './styles/index.scss';
+
+const Countries = ({ t }) => {
     const [value, setValue] = useState('');
     const [dataCountries, setDataCountries] = useState([]);
     const [newdataCountries, setnewDataCountries] = useState([]);
     const [description, setDescription] = useState(false);
+    const [darkMode, setDarkMode] = useDarkMode();
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+    }
 
     useEffect(() => {
         axios.get("https://restcountries.eu/rest/v2/all")
@@ -54,63 +57,44 @@ const Countries = () => {
         setDescription(!description);
     }
 
-    const renderCountries = () => {
-        let content = newdataCountries.map((country, index) => {
-            return (
-                <ParagraphDescription key={index} theme={{ total: newdataCountries.length }} >
-                    {country.name}
-                </ParagraphDescription>
-            )
-        })
+    // https://matthewrayfield.com/articles/animating-urls-with-javascript-and-emojis/
+    let f = ['🌑', '🌒', '🌓', '🌔', '🌝', '🌖', '🌗', '🌘'];
 
-        if (newdataCountries.length === 1) {
-            content = newdataCountries.map((country, index) => {
-                return (
-                    <OneCountry key={index} >
-                        <ContainerNameCountry>
-                            <h2>{country.name}</h2>
-                        </ContainerNameCountry>
-                        <ContainerInformationCountry>
-                            <p>Столица: {country.capital}</p>
-                            <p>Населенение: {country.population}</p>
-                        </ContainerInformationCountry>
-                        <ContainerLanguagesCountry>
-                            <h2>Языки:</h2>
-                            <ul>
-                                {country.languages.map((language, index) => {
-                                    return (
-                                        <li key={index} >{language.name}</li>    
-                                    )
-                                })}
-                            </ul>
-                        </ContainerLanguagesCountry>
-                        <ContainerFlagCountry>
-                            <ContainerFlagCountryImage src={country.flag} />
-                        </ContainerFlagCountry>
-                    </OneCountry>
-                )
-            })
-        }
+    const loop = () => {
+        document.title = f[Math.floor((Date.now()/100)%f.length)];
 
-        if (newdataCountries.length > 10 && description) {
-            return <ParagraphDescription theme={{ total: newdataCountries.length }} >Много совпадений, укажите другой фильтр</ParagraphDescription>;
-        }
-
-        return value !== '' ? content : null;
-    }
+        setTimeout(loop, 50);
+    }    
 
     return (
         <ContainerCountries>
             <GlobalContainer />
-            <Link to={{pathname: '/'}} >На главную</Link>
+            <div className="header" >
+                <div className="navbar">
+                    <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
+                </div>
+                <Link to={{pathname: '/'}} >{t('На главную')}</Link>
+                <div className="dropdown">
+                    <span>{t('Изменить язык')}</span>
+                    <div className="dropdown-content">
+                        <button onClick={() => changeLanguage('ru')}>Russian</button>
+                        <button onClick={() => changeLanguage('en')}>English</button>
+                    </div>
+                </div>
+            </div>
             <ContainerMain>
-                Поиск страны: <Input type="text" value={value} onChange={onSearchCountries} />
+                {t('Поиск страны')}: <Input type="text" value={value} onChange={onSearchCountries} />
                 <ContainerFilterCountries>
-                    {renderCountries()}
+                    {loop()}
+                    <ContentCountry
+                        newdataCountries={newdataCountries}
+                        description={description}
+                        value={value}
+                        />
                 </ContainerFilterCountries>
             </ContainerMain>
         </ContainerCountries>
     )
 }
 
-export default Countries;
+export default withTranslation()(Countries);

@@ -10,6 +10,8 @@ import SearchPhonebook from './SearchPhonebook';
 import Input from './Input';
 import NumbersPhonebook from './NumbersPhonebook';
 import FormPhonebook from './FormPhonebook';
+import Toggle from './Toggle';
+import ContentCountry from './ContentCountry';
 
 export {
     Content,
@@ -23,5 +25,7 @@ export {
     SearchPhonebook,
     Input,
     NumbersPhonebook,
+    ContentCountry,
+    Toggle,
     FormPhonebook
 }
