@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import i18n from '../../translation/i18n';
 import useDarkMode from '../../utils/use-dark-mode';
+import useColorMode from '../../utils/console-color';
 
 import './styles/index.scss';
 
@@ -21,6 +22,7 @@ const Countries = ({ t }) => {
     const [newdataCountries, setnewDataCountries] = useState([]);
     const [description, setDescription] = useState(false);
     const [darkMode, setDarkMode] = useDarkMode();
+    const colorMode = useColorMode();
 
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
@@ -64,7 +66,11 @@ const Countries = ({ t }) => {
         document.title = f[Math.floor((Date.now()/100)%f.length)];
 
         setTimeout(loop, 50);
-    }    
+    } 
+
+    // colorMode.stream('test', 'HoWWWWWWWWWWWWWWWWWlllllllllllllllll', 'warn', {color: '#999', background: '#000'});
+    // colorMode.stream('newtest', 'fds', 'info', {color: 'orange', background: 'beige'});
+    colorMode.stream('Данные стран', dataCountries, 'info', {color: 'blue', background: 'beige'});
 
     return (
         <ContainerCountries>
